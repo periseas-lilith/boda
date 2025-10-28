@@ -84,9 +84,13 @@ export default function Hero({ cfg, countdown, targetId = "ceremonia" }) {
 
         /* ↑ Subimos MÁS el botón “Ver detalles” (más separación del borde inferior) */
         .scroll-cta{
-          position:absolute; left:50%; transform:translateX(-50%);
-          bottom: 72px;                /* antes: 28px */
-          display:grid; gap:10px; place-items:center;
+          position:absolute; 
+          left:50%; 
+          transform:translateX(-50%);
+          bottom: 140px;      
+          display:grid; 
+          gap:10px; 
+          place-items:center;
           z-index: 3;
         }
         .scroll-cue{
