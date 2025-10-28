@@ -1,12 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// ✅ Base relativa (para Hostinger y cualquier hosting)
 export default defineConfig({
+  base: './',
   plugins: [react()],
-  server: {
-    host: true,      // allow Docker to bind 0.0.0.0
-    port: 5173,
-    strictPort: true,
-    open: false,
-  }
 })

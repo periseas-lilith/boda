@@ -1,0 +1,22 @@
+cat > .htaccess << 'EOF'
+# --- React / Vite SPA ---
+Options -Indexes
+DirectoryIndex dist/index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Si el archivo o directorio existe, se sirve directamente
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Si no existe, se redirige al build (dist)
+  RewriteRule ^ dist/index.html [L]
+</IfModule>
+
+# --- Forzar HTTPS (opcional pero recomendado) ---
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+EOF
