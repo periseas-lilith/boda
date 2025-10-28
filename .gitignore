@@ -2,7 +2,6 @@
 # React / Node / Vite / CRA base
 # ---------------------------------------------
 node_modules/
-dist/
 build/
 .cache/
 .tmp/
