@@ -1,0 +1,55 @@
+# ---------------------------------------------
+# React / Node / Vite / CRA base
+# ---------------------------------------------
+node_modules/
+dist/
+build/
+.cache/
+.tmp/
+.DS_Store
+
+# Dependencias
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Sistema operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos del IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Variables de entorno
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Archivos de test y cobertura
+coverage/
+__tests__/
+jest-html-reporters-*.html
+*.lcov
+
+# Archivos de build temporal
+*.log
+*.gz
+*.zip
+*.tar
+*.tgz
+
+# ---------------------------------------------
+# Si usas imágenes o videos grandes que no quieras en Git:
+# ---------------------------------------------
+public/uploads/
+public/img/raw/

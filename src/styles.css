@@ -1,0 +1,204 @@
+:root{
+  /* Base */
+  --bg:#f3f8ff; --ink:#0f172a;
+
+  /* Vintage Blue & Gold */
+  --neptune:#3b5570;      /* navy azulado */
+  --dusty:#8fa9bd;        /* dusty blue */
+  --sage:#95a98c;         /* sage green */
+  --grayx:#cfcfd1;        /* gray suave */
+  --brass:#b08d57;        /* dorado/brass */
+
+  /* Aux */
+  --glass: rgba(255,255,255,.75);
+  --glass2: rgba(255,255,255,.55);
+}
+html, body, #root, #app {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+html, body { font-family: var(--font-sans); }
+
+/* utilidades */
+.script{
+  font-family: var(--font-script);
+  letter-spacing: .3px;
+  font-weight: 400;
+}
+
+.serif{
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 20; 
+}
+
+.hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;color:white;overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.7)}
+.hero .content{position:relative;z-index:1;padding:0 20px;max-width:720px}
+.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:80px}
+.chips{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease}
+.reveal.in{ opacity:1; transform:none; -webkit-transform:none; -moz-transform:none; -ms-transform:none; -o-transform:none; }
+section[id]{scroll-margin-top:72px}
+.rounded-xl{border-radius:18px}
+/* === Tipografía base === */
+:root{
+  --font-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Fraunces", "Cormorant Garamond", serif; /* títulos/fechas */
+  --font-script: "Great Vibes", "Dancing Script", cursive; /* nombres */
+}
+
+/* Botones MUI más elegantes */
+.MuiButton-root{
+  text-transform: none !important;
+  font-weight: 600 !important;
+  letter-spacing: .2px;
+  border-radius: 999px !important;
+  padding-inline: 18px !important;
+}
+/* HERO base */
+.hero{
+  position:relative; min-height: 92vh; color:#fff; overflow:hidden;
+}
+.hero img.bg{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover;
+  object-position:center 28%;     /* enfoca las caras */
+  filter:brightness(.9);          /* casi sin oscurecer para que se vea la foto */
+}
+
+/* Título ARRIBA (no tapa) */
+.hero-headline{
+  position:absolute; left:50%; top:max(5vh, 18px); transform:translateX(-50%);
+  text-align:center; width:min(92vw, 720px); padding:0 12px;
+}
+.hero-headline .script{
+  margin:0; font-size:clamp(40px, 9vw, 80px); line-height:.95;
+  text-shadow: 0 2px 14px rgba(0,0,0,.35);
+}
+.hero-headline .serif{
+  margin:6px 0 0; font-size:clamp(14px, 3.6vw, 18px);
+  text-shadow: 0 1px 8px rgba(0,0,0,.28);
+}
+
+@media (min-width:900px){
+  .hero{ min-height:82vh; }
+  .hero-countdown{ top:54vh; }
+}
+
+/* === Contador “fresh” Vintage Blue & Gold === */
+/* === SPLIT FLIP-CLOCK === */
+.hero-countdown{
+  position:absolute; left:50%; top:89vh; transform:translateX(-50%);
+  display:flex; gap:0; padding:0; border-radius:16px; overflow:hidden;
+  box-shadow: 0 12px 30px rgba(15,23,42,.22);
+}
+.counter{
+  min-width:86px; padding:10px 14px; background:#e9eff5cc; backdrop-filter:blur(4px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  position:relative;
+}
+.counter:not(:last-child){ border-right:1px solid #cfd7df; }
+.counter::before{
+  content:""; position:absolute; left:0; right:0; top:50%; height:1px;
+  background:linear-gradient(90deg, transparent, #cbd6df, transparent); opacity:.8;
+}
+.counter .n{
+  font-family:"Fraunces",serif; font-variant-numeric:tabular-nums;
+  font-weight:600; font-size:22px; color:#2e475e;
+}
+.counter .l{
+  margin-top:6px; font-size:10px; letter-spacing:.34px; color:#4e6070; text-transform:uppercase;
+}
+
+.hero-countdown{ animation:popIn .45s ease both; }
+@keyframes popIn{ from{ transform:translateX(-50%) translateY(6px) scale(.98); opacity:0; }
+                  to{   transform:translateX(-50%) translateY(0)   scale(1);    opacity:1; } }
+
+/* Botones más abajo */
+.hero-actions{
+  position:absolute;
+  left:50%;
+  bottom:100px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  -webkit-transform:translateX(-50%);
+  -moz-transform:translateX(-50%);
+  -ms-transform:translateX(-50%);
+  -o-transform:translateX(-50%);
+}
+
+/* Ola */
+.wave{ position:absolute; left:0; right:0; bottom:-50px; width:100%; height:80px; }
+/* ===== Headline minimal ===== */
+.h-names{
+  margin:0;
+  font-size:clamp(40px, 9vw, 76px);
+  line-height:.95;
+  text-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+
+/* sub (muy discreto) */
+.h-sub{
+  margin:6px 0 2px;
+  font-size:clamp(12px, 2.8vw, 14px);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color: color-mix(in oklab, #fff 85%, var(--dusty) 15%);
+  text-shadow: 0 1px 6px rgba(0,0,0,.18);
+}
+
+/* fecha — pill translúcida, sin dorado ni íconos */
+.h-date{
+  display:inline-block;
+  margin:4px 0 0;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:clamp(13px, 3.5vw, 17px);
+  letter-spacing:.2px;
+  color:#f8fbff;
+  background: rgba(0,0,0,.22);            /* sutil */
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+}
+/* Overlay para contraste sin tapar la foto */
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.22) 0%, rgba(0,0,0,.06) 40%, rgba(0,0,0,0) 70%);
+  pointer-events:none;
+}
+.hero img.bg{ filter: brightness(.96); } /* menos oscura que .7/.9 */
+.h-sub{
+  /* …lo que ya tienes… */
+  color:#eaf2f9;                 /* fallback */
+  color: color-mix(in oklab, #fff 85%, var(--dusty) 15%);
+}
+
+/* si quieres aún más limpio, puedes bajar opacidad:
+.h-date{ background: rgba(0,0,0,.16); border-color: rgba(255,255,255,.18); }
+*/
+.css-mdbmxe-MuiContainer-root{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* Oculta la sección de detalles hasta que sea el objetivo del hash */
+#detalles-religiosa { 
+  display: none;
+  scroll-margin-top: 84px; /* ajusta si tienes AppBar fija */
+  opacity: 0;
+}
+
+#detalles-religiosa:target {
+  display: block;
+  animation: fadeIn .35s ease;
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
