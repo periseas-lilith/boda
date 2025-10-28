@@ -1,5 +1,5 @@
 // components/ReligiousDetails.jsx
-import React from "react";
+import React, { useMemo } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
@@ -10,6 +10,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Button from "@mui/material/Button";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 // Iconos base azules y de sección
@@ -34,7 +35,11 @@ const Bullet = () => (
 );
 
 function peso(n) {
-    return n.toLocaleString("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 });
+    return n.toLocaleString("es-MX", {
+        style: "currency",
+        currency: "MXN",
+        maximumFractionDigits: 0,
+    });
 }
 
 function Section({ title, overline, children }) {
@@ -46,8 +51,19 @@ function Section({ title, overline, children }) {
                 </Typography>
             )}
             <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-                <Box sx={{ width: 10, height: 10, borderRadius: "999px", background: BLUE, boxShadow: `0 0 0 6px ${BLUE_SOFT}` }} />
-                <Typography variant="h5" sx={{ fontFamily: "serif", fontWeight: 800, letterSpacing: .2 }}>
+                <Box
+                    sx={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: "999px",
+                        background: BLUE,
+                        boxShadow: `0 0 0 6px ${BLUE_SOFT}`,
+                    }}
+                />
+                <Typography
+                    variant="h5"
+                    sx={{ fontFamily: "serif", fontWeight: 800, letterSpacing: 0.2 }}
+                >
                     {title}
                 </Typography>
             </Box>
@@ -63,14 +79,9 @@ export default function ReligiousDetails({
     intro = `Querida familia y amigos, nos emociona compartir con ustedes un viaje inolvidable para celebrar nuestra boda en la hermosa playa de Zicatela, Oaxaca. Partiremos juntos desde Puebla, rumbo a unos días llenos de alegría, descanso y momentos únicos. ¡Gracias por ser parte de esta celebración tan especial!`,
 
     // Fotos del hotel
-    hotelPhotos = [
-        "/img/hotel/h1.jpg",
-        "/img/hotel/h2.jpg",
-        "/img/hotel/h3.jpg",
-        "/img/hotel/h4.jpg",
-    ],
+    hotelPhotos = ["/img/hotel/h1.jpg", "/img/hotel/h2.jpg", "/img/hotel/h3.jpg", "/img/hotel/h4.jpg"],
 
-    // DETALLES (antes "features") — ahora estilo amenidades para no cortar lectura
+    // Detalles
     details = [
         { icon: <BeachAccessIcon />, text: "PARAÍSO TERRENAL · Visitar playas exóticas" },
         { icon: <LuggageIcon />, text: "TRANSPORTE SEGURO · El destino será simplemente mágico" },
@@ -87,7 +98,7 @@ export default function ReligiousDetails({
         { icon: <WavesIcon />, text: "A 10 min de la playa" },
     ],
 
-    // Habitaciones (dos carruseles)
+    // Habitaciones
     rooms = {
         estandar: [
             { name: "Una cama matrimonial", people: 2, img: "/img/rooms/std_1mat.jpg", perNight: 1500, threeNights: 4500 },
@@ -122,6 +133,15 @@ export default function ReligiousDetails({
         ],
     },
 }) {
+    // ✅ AHORA el hook está dentro del componente
+    const whatsappUrl = useMemo(() => {
+        const msg =
+            `Hola, quiero confirmar mi asistencia a la ceremonia religiosa.` +
+            `\n\nNombre: ` +
+            `\nAcompañantes: `;
+        return `https://wa.me/522229995285?text=${encodeURIComponent(msg)}`;
+    }, []);
+
     return (
         <section id="detalles-religiosa" className="reveal" style={{ margin: 0 }}>
             {/* Mostrar solo al hacer clic */}
@@ -151,8 +171,7 @@ export default function ReligiousDetails({
                 sx={{
                     overflow: "hidden",
                     borderRadius: 3,
-                    background:
-                        `linear-gradient(180deg, #ffffff, #ffffff),
+                    background: `linear-gradient(180deg, #ffffff, #ffffff),
              radial-gradient(1200px 400px at -10% -30%, ${BLUE_SOFT} 0%, transparent 60%),
              radial-gradient(1200px 400px at 110% -10%, ${BLUE_SOFT} 0%, transparent 60%)`,
                     backgroundBlendMode: "normal, multiply, multiply",
@@ -171,17 +190,26 @@ export default function ReligiousDetails({
                         borderBottom: `2px solid ${BLUE_LINE}`,
                     }}
                 >
-                    <Box sx={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.05))" }} />
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            inset: 0,
+                            background: "linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.05))",
+                        }}
+                    />
                 </Box>
 
                 <Box sx={{ p: { xs: 2.5, sm: 3.5, md: 4 } }}>
                     {/* Intro */}
                     <Section overline="Boda religiosa — Zicatela, Oaxaca" title="Información general">
-                        <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.7, borderLeft: `3px solid ${BLUE}`, pl: 2 }}>
+                        <Typography
+                            variant="body1"
+                            sx={{ mb: 2, lineHeight: 1.7, borderLeft: `3px solid ${BLUE}`, pl: 2 }}
+                        >
                             {intro}
                         </Typography>
 
-                        {/* Detalles clave: formato amenidades (no se corta lectura) */}
+                        {/* Detalles clave */}
                         <Card sx={{ p: 2, border: `1px solid ${BLUE_LINE}`, background: "#fff" }}>
                             <Grid container spacing={1.5}>
                                 {details.map((d, i) => (
@@ -202,14 +230,23 @@ export default function ReligiousDetails({
                             {/* Fechas del viaje */}
                             <Grid item xs={12} md={5}>
                                 <Card sx={{ p: 2, border: `1px solid ${BLUE_LINE}`, background: "#fff" }}>
-                                    <Typography sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1, color: BLUE, fontWeight: 800 }}>
+                                    <Typography
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: 1,
+                                            mb: 1,
+                                            color: BLUE,
+                                            fontWeight: 800,
+                                        }}
+                                    >
                                         <CalendarMonthIcon /> Viaje
                                     </Typography>
                                     <Typography variant="body1">{travel.range}</Typography>
                                 </Card>
                             </Grid>
 
-                            {/* Plan de pagos con columnas fijas en TODAS las filas */}
+                            {/* Plan de pagos */}
                             <Grid item xs={12} md={7}>
                                 <Card sx={{ p: 1.5, border: `1px solid ${BLUE_LINE}`, background: "#fff" }}>
                                     <Typography sx={{ color: BLUE, fontWeight: 800, mb: 1 }}>
@@ -222,13 +259,17 @@ export default function ReligiousDetails({
                                             width: "100%",
                                             borderCollapse: "separate",
                                             borderSpacing: 0,
-                                            tableLayout: "fixed",          // ✅ columnas uniformes
+                                            tableLayout: "fixed",
                                             "& th, & td": { padding: "10px 8px", borderBottom: "1px solid #eee" },
-                                            "& thead th": { fontSize: 13, color: "rgba(0,0,0,.6)", textAlign: "left" },
+                                            "& thead th": {
+                                                fontSize: 13,
+                                                color: "rgba(0,0,0,.6)",
+                                                textAlign: "left",
+                                            },
                                             "& tbody tr:nth-of-type(odd)": { background: "#fafafa" },
                                         }}
                                     >
-                                        {/* Distribución de columnas: 50% / 25% / 25% */}
+                                        {/* 50% / 50% */}
                                         <colgroup>
                                             <col style={{ width: "50%" }} />
                                             <col style={{ width: "50%" }} />
@@ -245,8 +286,11 @@ export default function ReligiousDetails({
                                                 <tr key={i}>
                                                     <td>
                                                         <Bullet />
-                                                        <strong>{d.title}</strong><br />
-                                                        <small>{d.amount ? `${peso(d.amount)} ${d.note || ""}` : "—"}</small>
+                                                        <strong>{d.title}</strong>
+                                                        <br />
+                                                        <small>
+                                                            {d.amount ? `${peso(d.amount)} ${d.note || ""}` : "—"}
+                                                        </small>
                                                     </td>
                                                     <td>
                                                         <Chip
@@ -255,14 +299,12 @@ export default function ReligiousDetails({
                                                             sx={{
                                                                 background: BLUE_SOFT,
                                                                 border: `1px solid ${BLUE_LINE}`,
-                                                                // ✅ permitir múltiples líneas
                                                                 height: "auto",
                                                                 maxWidth: "100%",
                                                                 whiteSpace: "normal",
                                                                 alignItems: "flex-start",
                                                                 textAlign: "center",
                                                                 px: 0.75,
-
                                                                 "& .MuiChip-label": {
                                                                     display: "block",
                                                                     whiteSpace: "normal",
@@ -272,7 +314,6 @@ export default function ReligiousDetails({
                                                                 },
                                                             }}
                                                         />
-
                                                     </td>
                                                 </tr>
                                             ))}
@@ -285,11 +326,19 @@ export default function ReligiousDetails({
 
                     <Divider sx={{ my: 2.5 }} />
 
-                    {/* Galería fotos hotel (horizontal, texto no se corta) */}
+                    {/* Galería fotos hotel */}
                     <Section title="Hotel · fotos">
                         <Box className="h-scroll">
                             {hotelPhotos.map((src, i) => (
-                                <Card key={i} sx={{ borderRadius: 2, overflow: "hidden", border: `1px solid ${BLUE_LINE}`, background: "#fff" }}>
+                                <Card
+                                    key={i}
+                                    sx={{
+                                        borderRadius: 2,
+                                        overflow: "hidden",
+                                        border: `1px solid ${BLUE_LINE}`,
+                                        background: "#fff",
+                                    }}
+                                >
                                     <Box sx={{ aspectRatio: "16/10", background: `url(${src}) center/cover` }} />
                                 </Card>
                             ))}
@@ -299,7 +348,7 @@ export default function ReligiousDetails({
                         </Typography>
                     </Section>
 
-                    {/* Amenidades (ya tenían iconos) */}
+                    {/* Amenidades */}
                     <Section title="Amenidades">
                         <Card sx={{ p: 2, borderRadius: 2, border: `1px solid ${BLUE_LINE}`, background: "#fff" }}>
                             <Grid container spacing={1.5}>
@@ -315,14 +364,24 @@ export default function ReligiousDetails({
                         </Card>
                     </Section>
 
-                    {/* ESTÁNDAR — carrusel con iconos (en vez de puntos) */}
+                    {/* Habitaciones estándar */}
                     <Section title="Habitaciones · categoría estándar">
                         <Box className="h-scroll">
                             {rooms.estandar.map((r, i) => (
-                                <Card key={`std-${i}`} sx={{ borderRadius: 2, overflow: "hidden", border: `1px solid ${BLUE_LINE}`, background: "#fff" }}>
+                                <Card
+                                    key={`std-${i}`}
+                                    sx={{
+                                        borderRadius: 2,
+                                        overflow: "hidden",
+                                        border: `1px solid ${BLUE_LINE}`,
+                                        background: "#fff",
+                                    }}
+                                >
                                     <Box sx={{ aspectRatio: "4/3", background: `url(${r.img}) center/cover` }} />
                                     <Box sx={{ p: 1.5 }}>
-                                        <Typography fontWeight={800} sx={{ mb: .25 }}>{r.name}</Typography>
+                                        <Typography fontWeight={800} sx={{ mb: 0.25 }}>
+                                            {r.name}
+                                        </Typography>
                                         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
                                             <GroupIcon sx={{ fontSize: 18, color: BLUE }} />
                                             <Typography variant="body2" sx={{ color: "text.secondary" }}>
@@ -330,8 +389,16 @@ export default function ReligiousDetails({
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-                                            <Chip size="small" label={`Noche: ${peso(r.perNight)}`} sx={{ border: `1px solid ${BLUE_LINE}`, background: "#fff" }} />
-                                            <Chip size="small" label={`3 noches: ${peso(r.threeNights)}`} sx={{ background: BLUE_SOFT, border: `1px solid ${BLUE_LINE}` }} />
+                                            <Chip
+                                                size="small"
+                                                label={`Noche: ${peso(r.perNight)}`}
+                                                sx={{ border: `1px solid ${BLUE_LINE}`, background: "#fff" }}
+                                            />
+                                            <Chip
+                                                size="small"
+                                                label={`3 noches: ${peso(r.threeNights)}`}
+                                                sx={{ background: BLUE_SOFT, border: `1px solid ${BLUE_LINE}` }}
+                                            />
                                         </Box>
                                     </Box>
                                 </Card>
@@ -342,14 +409,24 @@ export default function ReligiousDetails({
                         </Typography>
                     </Section>
 
-                    {/* SUPERIOR — carrusel con iconos */}
+                    {/* Habitaciones superior */}
                     <Section title="Habitaciones · categoría superior">
                         <Box className="h-scroll">
                             {rooms.superior.map((r, i) => (
-                                <Card key={`sup-${i}`} sx={{ borderRadius: 2, overflow: "hidden", border: `1px solid ${BLUE_LINE}`, background: "#fff" }}>
+                                <Card
+                                    key={`sup-${i}`}
+                                    sx={{
+                                        borderRadius: 2,
+                                        overflow: "hidden",
+                                        border: `1px solid ${BLUE_LINE}`,
+                                        background: "#fff",
+                                    }}
+                                >
                                     <Box sx={{ aspectRatio: "4/3", background: `url(${r.img}) center/cover` }} />
                                     <Box sx={{ p: 1.5 }}>
-                                        <Typography fontWeight={800} sx={{ mb: .25 }}>{r.name}</Typography>
+                                        <Typography fontWeight={800} sx={{ mb: 0.25 }}>
+                                            {r.name}
+                                        </Typography>
                                         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
                                             <GroupIcon sx={{ fontSize: 18, color: BLUE }} />
                                             <Typography variant="body2" sx={{ color: "text.secondary" }}>
@@ -357,8 +434,16 @@ export default function ReligiousDetails({
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-                                            <Chip size="small" label={`Noche: ${peso(r.perNight)}`} sx={{ border: `1px solid ${BLUE_LINE}`, background: "#fff" }} />
-                                            <Chip size="small" label={`3 noches: ${peso(r.threeNights)}`} sx={{ background: BLUE_SOFT, border: `1px solid ${BLUE_LINE}` }} />
+                                            <Chip
+                                                size="small"
+                                                label={`Noche: ${peso(r.perNight)}`}
+                                                sx={{ border: `1px solid ${BLUE_LINE}`, background: "#fff" }}
+                                            />
+                                            <Chip
+                                                size="small"
+                                                label={`3 noches: ${peso(r.threeNights)}`}
+                                                sx={{ background: BLUE_SOFT, border: `1px solid ${BLUE_LINE}` }}
+                                            />
                                         </Box>
                                     </Box>
                                 </Card>
@@ -371,7 +456,7 @@ export default function ReligiousDetails({
 
                     <Divider sx={{ my: 2.5 }} />
 
-                    {/* Transporte con iconos en la lista */}
+                    {/* Transporte */}
                     <Section title="Transporte">
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={7}>
@@ -399,8 +484,10 @@ export default function ReligiousDetails({
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
+                                        gap: 2,
                                         border: `1px solid ${BLUE_LINE}`,
                                         background: BLUE_SOFT,
+                                        flexDirection: "column",
                                     }}
                                 >
                                     <Box sx={{ textAlign: "center" }}>
@@ -410,6 +497,21 @@ export default function ReligiousDetails({
                                         <Typography variant="h3" sx={{ fontWeight: 900, color: BLUE }}>
                                             {peso(transport.price)}
                                         </Typography>
+                                    </Box>
+
+                                    <Box sx={{ textAlign: "center" }}>
+                                        <Button
+                                            href={whatsappUrl}
+                                            target="_blank"
+                                            variant="contained"
+                                            sx={{
+                                                background: "linear-gradient(90deg, #25D366, #128C7E)",
+                                                boxShadow: "0 10px 30px rgba(18,140,126,.35)",
+                                                "&:hover": { filter: "brightness(1.05)" },
+                                            }}
+                                        >
+                                            Confirmar por WhatsApp
+                                        </Button>
                                     </Box>
                                 </Card>
                             </Grid>

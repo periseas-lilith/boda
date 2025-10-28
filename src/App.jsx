@@ -22,7 +22,7 @@ export default function App() {
   const [loading, setLoading] = useState(true)
 
   const countdown = useMemo(() => {
-    const target = new Date('2025-12-06T12:00:00')
+    const target = new Date('2025-12-06T12:30:00')
     const diff = Math.max(0, target - now)
     return {
       days: Math.floor(diff / 86400000),

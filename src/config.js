@@ -1,7 +1,7 @@
 const cfg = {
   couple: 'Aidali & Jorge',
   date: 'Sábado 6 de diciembre de 2025',
-  time: '12:00 p.m.',
+  time: '12:30 p.m.',
   receptionTime: '2:30 p.m.',
   ceremonyPlace: 'Nuestra casa (dirección aquí)',
   pricePerPerson: 300,

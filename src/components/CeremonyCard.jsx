@@ -36,7 +36,7 @@ function makeIcsUrl() {
 export default function CeremonyParallax({ cfg = {} }) {
   // Texto solicitado:
   const addressText =
-    "Tierra Blanca 4C, Bello Horizonte, 72735 Heroica Puebla de Zaragoza, Pue., México";
+    "Tierra Blanca 3C, Bello Horizonte, 72735 Heroica Puebla de Zaragoza, Pue., México";
 
   // Si no proporcionas coverUrl, uso una de stock
   const coverUrl =
