@@ -71,15 +71,15 @@ export default function App() {
   }
 
   const buffetPhotos = [
-    "./public/img/menu/menu_1.jpg",
-    "./public/img/menu/menu_2.jpg",
-    "./public/img/menu/menu_3.jpg",
-    "./public/img/menu/menu_4.jpg",
-    "./public/img/menu/menu_5.jpg",
-    "./public/img/menu/menu_6.jpg",
-    "./public/img/menu/menu_7.jpg",
-    "./public/img/menu/menu_8.jpg",
-    "./public/img/menu/menu_9.jpg",
+    "/img/menu/menu_1.jpg",
+    "/img/menu/menu_2.jpg",
+    "/img/menu/menu_3.jpg",
+    "/img/menu/menu_4.jpg",
+    "/img/menu/menu_5.jpg",
+    "/img/menu/menu_6.jpg",
+    "/img/menu/menu_7.jpg",
+    "/img/menu/menu_8.jpg",
+    "/img/menu/menu_9.jpg",
   ];
   const target = new Date('2025-12-06T12:00:00-06:00  ')
   const t = setInterval(() => setNow(new Date()), 1000)
